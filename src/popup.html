@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Em-Dash Remover Settings</title>
+    <style>
+      body {
+        width: 300px;
+        padding: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 18px;
+        margin: 0 0 16px 0;
+        color: #333;
+      }
+
+      .setting {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .setting:last-child {
+        border-bottom: none;
+      }
+
+      label {
+        font-size: 14px;
+        color: #555;
+        cursor: pointer;
+      }
+
+      .toggle {
+        position: relative;
+        width: 44px;
+        height: 24px;
+      }
+
+      .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.3s;
+        border-radius: 24px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #2196f3;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+
+      .info {
+        margin-top: 16px;
+        padding: 12px;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #666;
+        line-height: 1.4;
+      }
+
+      .supported-sites {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .supported-sites ul {
+        margin: 8px 0 0 0;
+        padding-left: 20px;
+      }
+
+      .supported-sites li {
+        margin: 4px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Em-Dash Remover</h1>
+
+    <div class="setting">
+      <label for="enabled">Enable NO EMDASHES injection</label>
+      <label class="toggle">
+        <input type="checkbox" id="enabled" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="info">
+      When enabled, this extension automatically appends "NO EMDASHES" to every
+      message you send, instructing the LLM to avoid using em-dashes (—) in its responses.
+    </div>
+
+    <div class="supported-sites">
+      <strong>Supported sites:</strong>
+      <ul>
+        <li>Claude (claude.ai)</li>
+        <li>ChatGPT (chatgpt.com)</li>
+        <li>T3Chat (t3.chat)</li>
+      </ul>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

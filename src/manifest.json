@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Em-Dash Remover",
+  "version": "1.0.0",
+  "description": "Automatically detects em-dashes in LLM output and triggers regeneration",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://claude.ai/*",
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://t3.chat/*",
+        "https://*.t3.chat/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background -->
+  <rect width="128" height="128" fill="#a23b67" rx="20"/>
+
+  <!-- Em-dash symbol -->
+  <text x="64" y="72" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">—</text>
+
+  <!-- Red strikethrough line -->
+  <line x1="25" y1="64" x2="103" y2="64" stroke="#ff3333" stroke-width="8" stroke-linecap="round"/>
+</svg>
