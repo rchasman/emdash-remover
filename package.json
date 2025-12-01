@@ -6,7 +6,8 @@
   "scripts": {
     "build": "bun run build.ts",
     "dev": "bun run build.ts --watch",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "package": "bun run build && cd dist && zip -r ../emdash-remover.zip . && cd .. && echo '✓ Package created: emdash-remover.zip'"
   },
   "devDependencies": {
     "@types/chrome": "^0.1.27",
