@@ -1,10 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- Background -->
-  <rect width="128" height="128" fill="#a23b67" rx="20"/>
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0EA5E9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E3A8A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
 
-  <!-- Em-dash symbol -->
-  <text x="64" y="72" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">—</text>
+  <!-- Background with rounded corners -->
+  <rect width="128" height="128" fill="url(#bg)" rx="28"/>
 
-  <!-- Red strikethrough line -->
-  <line x1="25" y1="64" x2="103" y2="64" stroke="#ff3333" stroke-width="8" stroke-linecap="round"/>
+  <!-- White circle background -->
+  <circle cx="64" cy="64" r="42" fill="white" opacity="0.95"/>
+
+  <!-- Em-dash (thicker and centered) -->
+  <rect x="36" y="59" width="56" height="10" fill="#333" rx="5"/>
+
+  <!-- Red prohibition circle and slash -->
+  <circle cx="64" cy="64" r="38" fill="none" stroke="#ff3b5c" stroke-width="6"/>
+  <line x1="40" y1="88" x2="88" y2="40" stroke="#ff3b5c" stroke-width="6" stroke-linecap="round"/>
 </svg>
