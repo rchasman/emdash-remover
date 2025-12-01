@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Generator - Em-Dash Remover</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #0EA5E9 0%, #1E3A8A 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            background: linear-gradient(135deg, #0EA5E9 0%, #1E3A8A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 0;
+            font-size: 36px;
+        }
+        .preview {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        .icon-preview {
+            text-align: center;
+        }
+        .icon-preview canvas {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .icon-preview p {
+            margin: 15px 0 0 0;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #0EA5E9 0%, #1E3A8A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
+        }
+        .instructions {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-left: 4px solid #d63031;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #2d3436;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        .instructions li {
+            margin: 8px 0;
+            color: #2d3436;
+        }
+        .instructions code {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Icon Generator</h1>
+        <p style="color: #666; font-size: 18px;">Professional icons for your Chrome extension</p>
+
+        <div class="preview">
+            <div class="icon-preview">
+                <canvas id="canvas16" width="16" height="16"></canvas>
+                <p>16×16</p>
+            </div>
+            <div class="icon-preview">
+                <canvas id="canvas48" width="48" height="48"></canvas>
+                <p>48×48</p>
+            </div>
+            <div class="icon-preview">
+                <canvas id="canvas128" width="128" height="128"></canvas>
+                <p>128×128</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button onclick="generateIcons()">🔄 Regenerate Icons</button>
+            <button onclick="downloadAll()">⬇️ Download All</button>
+        </div>
+
+        <div id="success" class="success">
+            ✓ Icons generated successfully! Click "Download All" to save them.
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Next Steps:</h3>
+            <ol>
+                <li>Click <strong>"Download All"</strong> (downloads will start automatically)</li>
+                <li>Move the 3 downloaded PNG files to <code>src/icons/</code> folder</li>
+                <li>Run <code>bun run build</code> to include them</li>
+                <li>Run <code>bun run package</code> to create your ZIP</li>
+                <li>Submit to Chrome Web Store! 🚀</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const svgContent = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+          <defs>
+            <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0EA5E9;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1E3A8A;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect width="128" height="128" fill="url(#bg)" rx="28"/>
+          <circle cx="64" cy="64" r="42" fill="white" opacity="0.95"/>
+          <rect x="36" y="59" width="56" height="10" fill="#333" rx="5"/>
+          <circle cx="64" cy="64" r="38" fill="none" stroke="#ff3b5c" stroke-width="6"/>
+          <line x1="40" y1="88" x2="88" y2="40" stroke="#ff3b5c" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        `;
+
+        let generatedImages = {};
+
+        function generateIcons() {
+            const sizes = [16, 48, 128];
+
+            sizes.forEach(size => {
+                const canvas = document.getElementById(`canvas${size}`);
+                const ctx = canvas.getContext('2d');
+
+                // Create an image from SVG
+                const img = new Image();
+                const svg = new Blob([svgContent], {type: 'image/svg+xml'});
+                const url = URL.createObjectURL(svg);
+
+                img.onload = function() {
+                    ctx.clearRect(0, 0, size, size);
+                    ctx.drawImage(img, 0, 0, size, size);
+                    URL.revokeObjectURL(url);
+
+                    // Store the canvas data for download
+                    canvas.toBlob(blob => {
+                        generatedImages[size] = blob;
+                    }, 'image/png');
+                };
+
+                img.src = url;
+            });
+
+            setTimeout(() => {
+                document.getElementById('success').style.display = 'block';
+            }, 500);
+        }
+
+        function downloadAll() {
+            if (Object.keys(generatedImages).length === 0) {
+                alert('Please generate icons first!');
+                return;
+            }
+
+            [16, 48, 128].forEach((size, index) => {
+                if (generatedImages[size]) {
+                    setTimeout(() => {
+                        const url = URL.createObjectURL(generatedImages[size]);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `icon${size}.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    }, index * 200); // Stagger downloads slightly
+                }
+            });
+
+            setTimeout(() => {
+                alert('✓ All 3 icons downloaded!\n\nNext: Move them to src/icons/ folder');
+            }, 800);
+        }
+
+        // Generate on load
+        window.onload = generateIcons;
+    </script>
+</body>
+</html>
