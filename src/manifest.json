@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Em-Dash Remover",
   "version": "1.0.0",
-  "description": "Automatically detects em-dashes in LLM output and triggers regeneration",
+  "description": "Automatically appends NO EMDASHES to LLM messages to prevent em-dashes in responses",
   "permissions": ["storage", "activeTab"],
   "icons": {
     "16": "icons/icon16.png",

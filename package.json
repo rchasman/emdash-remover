@@ -1,7 +1,7 @@
 {
   "name": "emdash-remover",
   "version": "1.0.0",
-  "description": "Chrome extension that detects em-dashes in LLM output and triggers regeneration",
+  "description": "Chrome extension that appends NO EMDASHES to LLM messages",
   "type": "module",
   "scripts": {
     "build": "bun run build.ts",
