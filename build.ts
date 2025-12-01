@@ -32,6 +32,15 @@ async function build() {
   await cp("./src/manifest.json", "./dist/manifest.json");
   await cp("./src/popup.html", "./dist/popup.html");
 
+  // Copy icons if they exist
+  try {
+    await mkdir("./dist/icons", { recursive: true });
+    await cp("./src/icons", "./dist/icons", { recursive: true });
+    console.log("✓ Icons copied");
+  } catch (err) {
+    console.log("⚠ No icons found (optional for development)");
+  }
+
   console.log("✓ Build complete!");
 }
 
